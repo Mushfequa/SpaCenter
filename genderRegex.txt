@@ -1,0 +1,2 @@
+    const genderRegex = /^(?:male|female|other)$/i;
+    return genderRegex.test(inputStr);

@@ -1,0 +1,238 @@
+/* ===== Navbar Custom Styles ===== */
+.navbar {
+    background: linear-gradient(90deg, #007bff, #6610f2); /* gradient bg */
+    padding: 0.8rem 1rem;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  }
+  
+  .navbar-brand {
+    font-size: 1.5rem;
+    font-weight: bold;
+    color: #fff !important;
+    letter-spacing: 1px;
+  }
+  
+  .navbar-brand:hover {
+    color: #ffdd57 !important;
+  }
+  
+  .navbar-nav .nav-link {
+    color: #fff !important;
+    font-weight: 500;
+    margin: 0 8px;
+    transition: color 0.3s ease, transform 0.2s ease;
+  }
+  
+  .navbar-nav .nav-link:hover {
+    color: #ffdd57 !important;
+    transform: translateY(-2px);
+  }
+  
+  .navbar-nav .nav-link.active {
+    color: #ffdd57 !important;
+    border-bottom: 2px solid #ffdd57;
+  }
+  
+  .navbar-nav .nav-link.disabled {
+    color: #ccc !important;
+  }
+  
+  .dropdown-menu {
+    border-radius: 8px;
+    padding: 0.5rem;
+    background-color: #f8f9fa;
+  }
+  
+  .dropdown-item {
+    font-weight: 500;
+    color: #333;
+    transition: background 0.3s;
+  }
+  
+  .dropdown-item:hover {
+    background-color: #007bff;
+    color: #fff;
+    border-radius: 5px;
+  }
+  
+  .form-control {
+    border-radius: 25px;
+    padding: 0.4rem 1rem;
+    border: 1px solid #ccc;
+  }
+  
+  .btn-outline-success {
+    border-radius: 25px;
+    font-weight: bold;
+    color: #fff;
+    border: 2px solid #ffdd57;
+    background-color: #ffdd57;
+    transition: all 0.3s;
+  }
+  
+  .btn-outline-success:hover {
+    background-color: #ffc107;
+    border-color: #ffc107;
+    color: #000;
+  }
+*{
+    font-family: montserrat;
+} 
+body{
+    background: f1fbff;
+} 
+.section-passing{
+    padding: 100px 0;
+}
+.carousel-item{
+    height: 100vh;
+    min-height: 100px;
+
+}
+.carousel-caption{
+    bottom: 220px;
+    z-index: 2;
+
+}
+.carousel-caption h5{
+    font-size: 45px;
+    text-transform: uppercase;
+    letter-spacing: 2px;
+    margin-top: 25px;
+}
+
+.carousel-caption p{
+    width: 60%;
+    margin: auto;
+    font-size: 10px;
+    line-height: 1.9;
+    
+}
+.carousel-inner::before{
+    content: "";
+    position:absolute;
+    width:102% ;
+    height: 102%;
+    top: 0;
+    left: 0;
+    background: rgba(0, 0, 0, 0.2);
+    z-index: 1;
+}
+.navbar-nav a{
+    ousel-caption h5{
+        font-size: 15px;
+        text-transform: uppercase;
+        font-weight: 500;
+}
+.navbar-light .navbar-brand{
+    color:#000;
+    ousel-caption h5{
+    font-size: 25px;
+    text-transform: uppercase;
+    font-weight: 700;
+    letter-spacing: 2px;
+
+}
+.navbar-light .navbar-brand:focus,
+.navbar-light .navbar-brand:hover
+{
+    color:#000;
+}
+.navbar-light .navbar-nav.navbar-light{
+    color:#000;
+
+}
+@media only screen and(min-width:768px) and (max-width:991px){
+    .carousel-caption{
+        bottom: 35px;
+
+    }
+    .carousel-caption p{
+        width:100%;
+        
+    }
+
+}
+
+@media only screen and(max-width:767px){
+    navbar-nav{
+        text-align: center;
+    }
+    .carousel-caption{
+        bottom: 125px;
+
+    }
+    .carousel-caption h5{
+        font-size: 15px;
+
+        
+    }
+    .carousel-caption h5{
+        padding:10px 15px;
+    }
+    .carousel-caption p{
+        width:100%;
+        line-height: 1.6;
+        font-size: 12px;
+    }
+}
+/* Contact Section */
+#contact {
+    background-color: #f9f9f9; /* Light background */
+}
+
+#contact h2 {
+    font-size: 2.5rem;
+    font-weight: 700;
+}
+
+#contact p {
+    font-size: 1rem;
+    color: #6c757d; /* muted text */
+}
+
+#contact form {
+    background-color: #fff;
+    padding: 30px;
+    border-radius: 10px;
+    box-shadow: 0 0 20px rgba(0,0,0,0.1);
+}
+
+#contact form .form-control {
+    border-radius: 5px;
+    border: 1px solid #ced4da;
+}
+
+#contact form .form-control:focus {
+    border-color: #ffc107; /* Bootstrap warning color */
+    box-shadow: 0 0 5px rgba(255, 193, 7, 0.5);
+}
+
+#contact form button.btn-warning {
+    background-color: #ffc107;
+    border: none;
+    padding: 10px 30px;
+    font-weight: 600;
+    border-radius: 5px;
+    transition: all 0.3s ease;
+}
+
+#contact form button.btn-warning:hover {
+    background-color: #e0a800;
+}
+
+.map-responsive {
+    overflow: hidden;
+    padding-bottom: 56.25%; /* 16:9 ratio */
+    position: relative;
+    height: 0;
+}
+
+.map-responsive iframe {
+    left: 0;
+    top: 0;
+    height: 100%;
+    width: 100%;
+    position: absolute;
+    border-radius: 10px;
+}

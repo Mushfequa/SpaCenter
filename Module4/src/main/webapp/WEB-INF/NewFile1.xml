@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<web-app>
+    <!-- Context Parameters -->
+    <context-param>
+        <param-name>databaseURL</param-name>
+        <param-value>jdbc:mysql://localhost:3306/mydb</param-value>
+    </context-param>
+    
+    <context-param>
+        <param-name>databaseUser</param-name>
+        <param-value>root</param-value>
+    </context-param>
+    
+    <context-param>
+        <param-name>databasePassword</param-name>
+        <param-value>password</param-value>
+    </context-param>
+    
+    <!-- Servlet Configuration -->
+    <servlet>
+        <servlet-name>ExampleServlet</servlet-name>
+        <servlet-class>com.ExampleServlet</servlet-class>
+    </servlet>
+    
+    <servlet-mapping>
+        <servlet-name>ExampleServlet</servlet-name>
+        <url-pattern>/ExampleServ</url-pattern>
+    </servlet-mapping>
+</web-app>

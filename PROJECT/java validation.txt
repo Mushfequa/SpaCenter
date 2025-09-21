@@ -1,0 +1,309 @@
+<script type="text/javascript">
+
+function validateFirstName(){
+//console.log("first name onBlur even trigger..");
+var fname=document.getElementById("input_fname").value;
+
+var regex = /^[A-Za-z]+$/;
+
+if(fname==""){
+	document.getElementById("fname_error").innerHTML="Please enter first name";
+
+}else if(!regex.test(fName)){
+	
+	document.getElementById("fname_error").innerHTML="Only alphabets are allowed";
+
+}else{
+	document.getElementById("fname_error").innerHTML="";
+
+}
+}
+
+function validateLastName(){
+	
+	alert('Method called');
+
+	var lname=document.getElementById("input_lname").value;
+
+	var regex =  /^[A-Za-z]+$/;
+
+	if(lname==""){
+		document.getElementById("lname_error").innerHTML="please enter last name";
+
+	}else if(!regex.test(lname)){
+		
+		document.getElementById("lname_error").innerHTML="Only alphabets are allowed";
+
+	}else{
+		document.getElementById("lname_error").innerHTML="";
+
+	}
+
+	}
+
+
+function validateEmail(){
+	//leswalamusfeka@gmail.com
+
+
+var email=document.getElementById("input_email").value;
+
+var regex = /^[A-Za-z0-9-_.]+@[A-Za-z]+\.[A-Za-z]{2,4}$/;
+
+if(email==""){
+	document.getElementById("email_error").innerHTML="please enter email address";
+
+}else if(!regex.test(email)){
+	
+	document.getElementById("email_error").innerHTML="please enter valid email address";
+
+}else{
+	document.getElementById("email_error").innerHTML="";
+
+}
+
+}
+
+function validateContact(){
+	
+
+
+	var contact=document.getElementById("input_contact").value;
+
+	var regex = /^\d{10}$/;
+
+
+	if(contact==""){
+		document.getElementById("contact_error").innerHTML="please enter contact number";
+
+	}else if(!regex.test(contact)){
+		
+		document.getElementById("contact_error").innerHTML="contact number must be 10 digit only";
+
+	}else{
+		document.getElementById("contact_error").innerHTML="";
+
+	}
+
+	}
+
+function validatePassword(){
+	
+
+
+	var password=document.getElementById("input_password").value;
+
+	var regex = /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@.#$!%*?&])[A-Za-z\d@.#$!%*?&]{8,15}$/;	
+	if(password==""){
+		document.getElementById("password_error").innerHTML="please enter password";
+
+	}else if(!regex.test(password)){
+		
+		document.getElementById("password_error").innerHTML="Must contains atleast one uppercase, lowercase, digit and length up to 16 characters";
+		
+
+	}else{
+		console.log('2'+password);
+		document.getElementById("password_error").innerHTML="";
+
+	}
+
+	}
+
+
+function validateForm(){
+	//Name validation
+	
+
+var fname=document.getElementById("input_fname").value;
+
+var regex = /^[A-Za-z]+$/;
+
+if(fname==""){
+	document.getElementById("fname_error").innerHTML="Please enter first name";
+
+}else if(!regex.test(fName)){
+	
+	document.getElementById("fname_error").innerHTML="Only alphabets are allowed";
+
+}else{
+	document.getElementById("fname_error").innerHTML="";
+	
+	//LastName validate
+
+}
+var lname=document.getElementById("input_lname").value;
+
+var regex =  /^[A-Za-z]+$/;
+
+if(lname==""){
+	document.getElementById("lname_error").innerHTML="please enter last name";
+
+}else if(!regex.test(lname)){
+	
+	document.getElementById("lname_error").innerHTML="Only alphabets are allowed";
+
+}else{
+	document.getElementById("lname_error").innerHTML="";
+
+}
+
+
+// Email validation 
+var email = document.getElementById("input_email").value;
+
+var regex = /^[A-Za-z0-9-_.]+@[A-Za-z]+\.[A-Za-z]{2,4}$/;
+
+if (email == "") {
+	document.getElementById("email_error").innerHTML = "Please enter email address";
+} else if (!regex.test(email)) {
+	document.getElementById("email_error").innerHTML = "Please enter valid email address";
+} else {
+	document.getElementById("email_error").innerHTML = "";
+}
+
+// Validate Contact 
+var contact = document.getElementById("input_contact").value;
+
+var regex = /^\d{10}$/;
+
+if (contact == "") {
+	document.getElementById("contact_error").innerHTML = "Please enter contact number";
+} else if (!regex.test(contact)) {
+	document.getElementById("contact_error").innerHTML = "Contact number must be 10 digit only";
+} else {
+	document.getElementById("contact_error").innerHTML = "";
+}
+
+//Address validation
+
+var address=document.getElementById("input_address").value;
+
+var regex =  /^[A-Za-z0-9]+$/;
+
+if(address==""){
+	document.getElementById("address_error").innerHTML="please enter Address";
+
+}else if(!regex.test(lname)){
+	
+	document.getElementById("address_error").innerHTML="please enter valid address";
+
+}else{
+	document.getElementById("address_error").innerHTML="";
+
+}
+//Hobbies validation
+var 
+
+// Gender validation 
+var radios = document.getElementsByName("gender");
+
+var isGenderSelected = false;
+
+for (var i = 0; i < radios.length; i++) {
+
+	if (radios[i].checked) {
+		isGenderSelected = true;
+		break;
+	}
+}
+
+if (!isGenderSelected) {
+	document.getElementById("gender_error").innerHTML = "Please select gender";
+} else {
+	document.getElementById("gender_error").innerHTML = "";
+}
+
+
+//Hobbies validation
+
+var checkboxes=document.getElementByName("hobbies");
+var saelectedValue=checkboxes.value;
+
+var isHobbiesSelected=false;
+for(var i=0;i<checkboxes.length;i++){
+
+if(checkboxes[i].checked){
+	ifHobbiesSelected=true;
+	break;
+}
+}
+if(!(selectedValue==='')){
+	document.getElementByName(hobbies_error).innerHTML="please select hobbies";
+	
+}else{
+	document.getElementByName(hobbies_error).innerHTML="";
+	
+
+}
+
+
+// Education validation
+var dropdown = document.getElementById("education");
+var selectedValue = dropdown.value;
+
+var isEducationSelected = false;
+
+if (!(selectedValue === '')) {
+	isEducationSelected = true;
+}
+
+if (!isEducationSelected) {
+	document.getElementById("education_error").innerHTML = "Please select education";
+} else {
+	document.getElementById("education_error").innerHTML = "";
+}
+
+//Resume validation
+var file=document.getElementById(input_file);
+//check if file selected
+if(!file){
+alert("please select a file.");
+event.preventDefault();
+return;
+}
+const validFileTypes=['image/jpeg','image/png','application/pdf'];
+ 
+ if(!validFileTypes.includes(file.type)){
+	 alert("please select a valid file type (JPEG,PNG,or PDF).");
+	 event.preventDefault();
+	 return;
+	 //check file size(e.g.,limit to 2MB)
+	 const maxSize=2*1024*1024;  //2MB in bytes
+	 if(file.size>maxSize){
+		 alert("please select a file smaller than 2MB,");
+	 }
+}
+
+// Password validation 
+var password = document.getElementById("input_password").value;
+
+var regex = /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@.#$!%*?&])[A-Za-z\d@.#$!%*?&]{8,15}$/;
+
+if (password == "") {
+	document.getElementById("password_error").innerHTML = "Please enter password";
+} else if (!regex.test(password)) {
+	console.log('1' + password);
+	document.getElementById("password_error").innerHTML = "Must contains atleast one uppercase, lowercase, digit and length up to 16 characters";
+} else {
+	console.log('2' + password);
+	document.getElementById("password_error").innerHTML = "";
+}
+
+// Confirm password validation 
+var password = document.getElementById("input_password").value;
+var cpassword = document.getElementById("input_cpassword").value;
+
+if (cpassword == "") {
+	document.getElementById("cpassword_error").innerHTML = "Please confirm password";
+} else if (cpassword!=password) {
+	console.log('1' + password);
+	document.getElementById("cpassword_error").innerHTML = "Password mismatch";
+} else {
+	console.log('2' + password);
+	document.getElementById("cpassword_error").innerHTML = "";
+}
+
+}
+
+</script> q

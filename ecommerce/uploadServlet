@@ -1,0 +1,23 @@
+
+public static final String UPLOAD_DIR="uploads";
+dopost 
+String name = req.getParameter("uname");
+Part part = req.getPart("image");
+
+String filename = getpaths(getPart.submittedFilename()).filename().toString();
+filename = System.CurrentTimeMilis()."_"+filename;
+
+
+
+String uploadPath = getContextServlet()+getRealPath("")File.Seperator+UPLOAD_DIR;
+System.out.println();
+File file = new File();
+if(!file.exists()){
+file.mkdir();
+
+
+}
+StringFilePath =uploadPath+filename+File.separator;
+part.write(filepath)
+
+}

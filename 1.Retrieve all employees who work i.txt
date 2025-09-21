@@ -1,0 +1,94 @@
+1.Retrieve all employees who work in the IT department.
+SELECT * FROM `employeerecords` WHERE department= "IT";
+
+2.Find the employees who have salary greater than 80000.
+SELECT * FROM `employeerecords` WHERE salary>= 80000;
+
+3.List the employees who were hired between 2018-01-01 and 2019-12-31.
+SELECT * FROM `employeerecords` WHERE HireDate between 2018-01-01 and 2019-12-31;
+
+4.Show the employees with a performance rating of 9 or Higher.
+SELECT * FROM `employeerecords` WHERE  perfomanceRating = ('9 or Higher');
+
+5.Display employees who are not in the HR Department.
+SELECT * FROM `employeerecords` WHERE `department` <> "HR";
+
+6.Find the employees whose first name starts with ‘J’.
+SELECT * FROM `employeerecords` WHERE `f_name` LIKE 'J%';
+
+7.List of Employees who have ‘son’ in their last name.
+SELECT * FROM `employeerecords` WHERE `l_name` LIKE '%son';
+
+8.Retrieve Employees whose age is between 30 and 40.
+SELECT * FROM `employeerecords` WHERE age between 30 and 40;
+
+9.Show employees who have performance ratings of 7,8 or 9. 
+SELECT * FROM `employeerecords` WHERE `perfomanceRating`=('7,8 or 9');
+
+10.Find the employees with a salary less than or equals to 70000.
+SELECT * FROM `employeerecords` WHERE salary <= 70000;
+
+11. Retrieve the records of Employees who were hired in the year 2020.
+
+ Show the employees whose last names are either ‘Doe’ ‘Smith’ or ‘Jones’.
+ List the employees who have a salary not equal to 75000.
+ Find the employees who have a performance rating of 8 and work in the Marketing department.
+Display Employees who have a performance rating of 7 or are in the Sales department.
+ Show employees whose salary is more than 70000 and less than 80000.
+ Retrieve Employees who do not have a performance rating of 7. 
+ List the employees whose department is not IT.
+ Find the employees who have a salary that ends with ‘000.00’.
+ Show employees who have a first name of ‘Emily’ or a last name of ‘Brown’.
+ List the employees who have ‘li’ in their first name.
+ Find employees whose performance rating is not null.
+Show employees whose age is not between 25 and 35.
+Retrieve the employees whose hire date is before ‘2017-01-01’.
+Find the employees whose last name is ‘Johnson’ or ‘Robinson’ and their salary is more than 70000.
+ Calculate the new Salary after a 10% raise for each employee.
+ Find the difference between the current salary and a hypothetical base salary of 65000 for each employee.
+ Show the monthly salary for each employee (assuming 12 months is a year).
+ Show the Hire date and the number of years each employee has worked (as of 2024).
+
+
+INSERT INTO EmployeeRecords (FirstName, LastName, Age, Department, Salary, HireDate, PerformanceRating) VALUES
+('John', 'Doe', 28, 'Marketing', 70000.00, '2019-05-21', 8),
+('Jane', 'Smith', 32, 'IT', 80000.00, '2018-03-15', 9),
+('Emily', 'Jones', 24, 'Sales', 60000.00, '2020-02-01', 7),
+('Michael', 'Brown', 45, 'IT', 95000.00, '2015-08-11', 9),
+('Jessica', 'Davis', 38, 'HR', 75000.00, '2017-04-25', 8),
+('William', 'Wilson', 41, 'Marketing', 68000.00, '2016-10-30', 7),
+('Olivia', 'Taylor', 27, 'Sales', 63000.00, '2019-06-17', 7),
+('James', 'Anderson', 35, 'IT', 85000.00, '2018-07-09', 8),
+('Isabella', 'Thomas', 29, 'HR', 72000.00, '2017-11-01', 8),
+('Ethan', 'Jackson', 39, 'Marketing', 71000.00, '2016-12-15', 7),
+('Sophia', 'White', 26, 'IT', 79000.00, '2020-01-27', 8),
+('Alexander', 'Harris', 37, 'Sales', 67000.00, '2018-03-20', 9),
+('Mia', 'Martin', 31, 'HR', 69000.00, '2019-08-15', 7),
+('Logan', 'Thompson', 30, 'Marketing', 73000.00, '2018-04-10', 8),
+('Ava', 'Garcia', 33, 'IT', 77000.00, '2017-02-18', 9),
+('Jacob', 'Martinez', 40, 'Sales', 65000.00, '2016-05-22', 7),
+('Charlotte', 'Robinson', 25, 'HR', 74000.00, '2020-07-29', 7),
+('Benjamin', 'Clark', 34, 'Marketing', 78000.00, '2018-09-04', 8),
+('Amelia', 'Rodriguez', 36, 'IT', 82000.00, '2017-12-14', 9),
+('Elijah', 'Lewis', 42, 'Sales', 66000.00, '2015-11-23', 7),
+('Evelyn', 'Lee', 23, 'HR', 73000.00, '2020-05-09', 7),
+('Henry', 'Walker', 46, 'Marketing', 76000.00, '2015-07-19', 8),
+('Harper', 'Hall', 28, 'IT', 81000.00, '2019-03-28', 9),
+('Liam', 'Allen', 27, 'Sales', 64000.00, '2019-10-16', 7),
+('Zoe', 'Young', 29, 'HR', 71000.00, '2017-08-05', 7),
+('Noah', 'Hernandez', 32, 'Marketing', 70000.00, '2018-01-24', 8),
+('Luna', 'King', 35, 'IT', 84000.00, '2017-05-29', 9),
+('Mason', 'Wright', 38, 'Sales', 62000.00, '2016-04-01', 7),
+('Lily', 'Scott', 24, 'HR', 68000.00, '2020-11-12', 7),
+('Oliver', 'Adams', 31, 'Marketing', 69000.00, '2018-07-08', 8);
+
+CREATE TABLE EmployeeRecords (
+    EmployeeID INT AUTO_INCREMENT PRIMARY KEY,
+    FirstName VARCHAR(50),
+    LastName VARCHAR(50),
+    Age INT,
+    Department VARCHAR(50),
+    Salary DECIMAL(10, 2),
+    HireDate DATE,
+    PerformanceRating INT
+);

@@ -1,0 +1,101 @@
+Q-9AJAX
+
+JSP PAGE 
+<form id="registrationForm">
+  <input type="text" name="name" id="name" placeholder="Enter Name" required />
+  <input type="email" name="email" id="email" placeholder="Enter Email" required />
+  <input type="password" name="password" id="password" placeholder="Enter Password" required />
+  <button type="submit">Register</button>
+</form>
+
+<script>
+  document.getElementById('email').addEventListener('blur', function() {
+    const email = this.value;
+    // AJAX call to check if email is unique
+    fetch('/checkEmail', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({ email: email })
+    }).then(response => response.json())
+      .then(data => {
+        if (!data.isUnique) {
+          alert('Email already exists');
+        }
+      });
+  });
+
+  document.getElementById('registrationForm').addEventListener('submit', function(event) {
+    event.preventDefault();
+    // Submit form data using AJAX after validation
+    const formData = new FormData(this);
+    fetch('/register', {
+      method: 'POST',
+      body: formData
+    }).then(response => {
+      // Handle response, trigger OTP email
+    });
+  });
+</script>
+
+SERVER SIDE VALIDATION
+SERVLET
+
+// OTP Generation
+String otp = String.valueOf(new Random().nextInt(999999));
+
+// Send OTP via JavaMail
+EmailService.sendOTP(email, otp);
+
+// Save OTP in session or database for verification
+session.setAttribute("otp", otp);
+
+EMAIL SERVICE
+
+public class EmailService {
+    public static void sendOTP(String email, String otp) {
+        // Code to send email with the OTP
+    }
+}
+
+OTP VERIFICATION
+JSP/HTML 
+
+<form id="otpForm">
+  <input type="text" name="otp" id="otp" placeholder="Enter OTP" required />
+  <button type="submit">Verify OTP</button>
+</form>
+
+SERVLET
+String sessionOtp = (String) session.getAttribute("otp");
+if (enteredOtp.equals(sessionOtp)) {
+  // Allow login
+} else {
+  // Display error
+}
+
+LOGIN SERVLET
+HttpSession session = request.getSession();
+session.setAttribute("user", loggedInUser); // Store user info in session
+
+MESSAGING SYSTEM
+JSP
+<form id="messageForm">
+  <input type="email" name="recipient" placeholder="Enter Recipient Email" required />
+  <textarea name="message" placeholder="Enter Message"></textarea>
+  <button type="submit">Send</button>
+</form>
+
+LOGOUT SERVLET
+HttpSession session = request.getSession(false);
+if (session != null) {
+  session.invalidate();
+  response.sendRedirect("login.jsp");
+}
+
+7. Prevent Back Button Access After Logout
+Cache Control: Add headers to JSP pages to prevent users from accessing logged-out pages using the back button.
+<% response.setHeader("Cache-Control", "no-cache, no-store, must-revalidate");
+   response.setHeader("Pragma", "no-cache");
+   response.setHeader("Expires", "0");
+%>
+

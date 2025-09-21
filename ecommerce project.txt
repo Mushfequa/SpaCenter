@@ -1,0 +1,87 @@
+CREATE TABLE products (
+    id INT AUTO_INCREMENT PRIMARY KEY,
+    name VARCHAR(255),
+    category VARCHAR(255),
+    model VARCHAR(255),
+    price DECIMAL(10, 2),
+    description TEXT,
+    image VARCHAR(255)
+);
+
+<%@ include file="header.jsp" %>
+<div class="container">
+    <h2>Add Product</h2>
+    <form action="AddProductServlet" method="post" enctype="multipart/form-data">
+        <div class="form-group">
+            <label for="name">Product Name:</label>
+            <input type="text" class="form-control" name="name" required>
+        </div>
+        <div class="form-group">
+            <label for="category">Product Category:</label>
+            <input type="text" class="form-control" name="category" required>
+        </div>
+        <div class="form-group">
+            <label for="model">Product Model:</label>
+            <input type="text" class="form-control" name="model" required>
+        </div>
+        <div class="form-group">
+            <label for="price">Price:</label>
+            <input type="text" class="form-control" name="price" required>
+        </div>
+        <div class="form-group">
+            <label for="description">Product Description:</label>
+            <textarea class="form-control" name="description" required></textarea>
+        </div>
+        <div class="form-group">
+            <label for="image">Product Image:</label>
+            <input type="file" class="form-control" name="image" required>
+        </div>
+        <button type="submit" class="btn btn-primary">Add Product</button>
+    </form>
+</div>
+<%@ include file="footer.jsp" %>
+
+
+@WebServlet("/AddProductServlet")
+public class AddProductServlet extends HttpServlet {
+    protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+        String name = request.getParameter("name");
+        String category = request.getParameter("category");
+        String model = request.getParameter("model");
+        String price = request.getParameter("price");
+        String description = request.getParameter("description");
+        Part imagePart = request.getPart("image");
+
+        String imageName = Paths.get(imagePart.getSubmittedFileName()).getFileName().toString();
+        String uploadPath = getServletContext().getRealPath("") + File.separator + "images" + File.separator + imageName;
+        File imageFile = new File(uploadPath);
+        imagePart.write(uploadPath);
+
+        // Database insertion
+        ProductDAO productDAO = new ProductDAO();
+        productDAO.addProduct(new Product(name, category, model, price, description, imageName));
+
+        response.sendRedirect("ViewProductsServlet");
+    }
+}
+
+<%@ include file="header.jsp" %>
+<div class="container">
+    <h2>Product List</h2>
+    <div class="row">
+        <c:forEach var="product" items="${products}">
+            <div class="col-md-4">
+                <div class="card">
+                    <img class="card-img-top" src="images/${product.image}" alt="${product.name}">
+                    <div class="card-body">
+                        <h5 class="card-title">${product.name}</h5>
+                        <p class="card-text">${product.description}</p>
+                        <a href="EditProductServlet?id=${product.id}" class="btn btn-primary">Edit</a>
+                        <a href="DeleteProductServlet?id=${product.id}" class="btn btn-danger">Delete</a>
+                    </div>
+                </div>
+            </div>
+        </c:forEach>
+    </div>
+</div>
+<%@ include file="footer.jsp" %>

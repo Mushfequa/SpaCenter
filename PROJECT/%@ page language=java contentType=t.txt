@@ -1,0 +1,286 @@
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+	pageEncoding="UTF-8"%>
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Registration Form</title>
+
+<script type="text/javascript">
+	function validateFirstName() {
+		// console.log("First name onBlur event trigger..");
+
+		var fname = document.getElementById("input_fname").value;
+
+		var regex = /^[A-Za-z]+$/;
+
+		if (fname == "") {
+			document.getElementById("fname_error").innerHTML = "Please enter first name";
+		} else if (!regex.test(fname)) {
+			document.getElementById("fname_error").innerHTML = "Only alphabets are allowed";
+		} else {
+			document.getElementById("fname_error").innerHTML = "";
+		}
+
+	}
+
+	function validateEmail() {
+
+		//dhirenpatel@gmail.com
+
+		var email = document.getElementById("input_email").value;
+
+		var regex = /^[A-Za-z0-9-_.]+@[A-Za-z]+\.[A-Za-z]{2,4}$/;
+
+		if (email == "") {
+			document.getElementById("email_error").innerHTML = "Please enter email address";
+		} else if (!regex.test(email)) {
+			document.getElementById("email_error").innerHTML = "Please enter valid email address";
+		} else {
+			document.getElementById("email_error").innerHTML = "";
+		}
+
+	}
+
+	function validateContact() {
+
+		console.log("event triggered");
+
+		var contact = document.getElementById("input_contact").value;
+
+		var regex = /^\d{10}$/;
+
+		if (contact == "") {
+			document.getElementById("contact_error").innerHTML = "Please enter contact number";
+		} else if (!regex.test(contact)) {
+			document.getElementById("contact_error").innerHTML = "Contact number must be 10 digit only";
+		} else {
+			document.getElementById("contact_error").innerHTML = "";
+		}
+
+	}
+
+	function validatePassword() {
+
+		var password = document.getElementById("input_password").value;
+
+		var regex = /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@.#$!%*?&])[A-Za-z\d@.#$!%*?&]{8,15}$/;
+
+		if (password == "") {
+			document.getElementById("password_error").innerHTML = "Please enter password";
+		} else if (!regex.test(password)) {
+			console.log('1' + password);
+			document.getElementById("password_error").innerHTML = "Must contains atleast one uppercase, lowercase, digit and length up to 16 characters";
+		} else {
+			console.log('2' + password);
+			document.getElementById("password_error").innerHTML = "";
+		}
+
+	}
+
+	function validateForm() {
+
+		// Name validation 
+		var fname = document.getElementById("input_fname").value;
+
+		var regex = /^[A-Za-z]+$/;
+
+		if (fname == "") {
+			document.getElementById("fname_error").innerHTML = "Please enter first name";
+		} else if (!regex.test(fname)) {
+			document.getElementById("fname_error").innerHTML = "Only alphabets are allowed";
+		} else {
+			document.getElementById("fname_error").innerHTML = "";
+		}
+
+		// Email validation 
+		var email = document.getElementById("input_email").value;
+
+		var regex = /^[A-Za-z0-9-_.]+@[A-Za-z]+\.[A-Za-z]{2,4}$/;
+
+		if (email == "") {
+			document.getElementById("email_error").innerHTML = "Please enter email address";
+		} else if (!regex.test(email)) {
+			document.getElementById("email_error").innerHTML = "Please enter valid email address";
+		} else {
+			document.getElementById("email_error").innerHTML = "";
+		}
+
+		// Validate Contact 
+		var contact = document.getElementById("input_contact").value;
+
+		var regex = /^\d{10}$/;
+
+		if (contact == "") {
+			document.getElementById("contact_error").innerHTML = "Please enter contact number";
+		} else if (!regex.test(contact)) {
+			document.getElementById("contact_error").innerHTML = "Contact number must be 10 digit only";
+		} else {
+			document.getElementById("contact_error").innerHTML = "";
+		}
+
+		// Gender validation 
+		var radios = document.getElementsByName("gender");
+
+		var isGenderSelected = false;
+
+		for (var i = 0; i < radios.length; i++) {
+
+			if (radios[i].checked) {
+				isGenderSelected = true;
+				break;
+			}
+		}
+
+		if (!isGenderSelected) {
+			document.getElementById("gender_error").innerHTML = "Please select gender";
+		} else {
+			document.getElementById("gender_error").innerHTML = "";
+		}
+
+		// Education validation
+		var dropdown = document.getElementById("education");
+		var selectedValue = dropdown.value;
+
+		var isEducationSelected = false;
+
+		if (!(selectedValue === '')) {
+			isEducationSelected = true;
+		}
+
+		if (!isEducationSelected) {
+			document.getElementById("education_error").innerHTML = "Please select education";
+		} else {
+			document.getElementById("education_error").innerHTML = "";
+		}
+
+		// Password validation 
+		var password = document.getElementById("input_password").value;
+
+		var regex = /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@.#$!%*?&])[A-Za-z\d@.#$!%*?&]{8,15}$/;
+
+		if (password == "") {
+			document.getElementById("password_error").innerHTML = "Please enter password";
+		} else if (!regex.test(password)) {
+			console.log('1' + password);
+			document.getElementById("password_error").innerHTML = "Must contains atleast one uppercase, lowercase, digit and length up to 16 characters";
+		} else {
+			console.log('2' + password);
+			document.getElementById("password_error").innerHTML = "";
+		}
+
+		// Confirm password validation 
+		var password = document.getElementById("input_password").value;
+		var cpassword = document.getElementById("input_cpassword").value;
+
+		if (cpassword == "") {
+			document.getElementById("cpassword_error").innerHTML = "Please confirm password";
+		} else if (cpassword!=password) {
+			console.log('1' + password);
+			document.getElementById("cpassword_error").innerHTML = "Password mismatch";
+		} else {
+			console.log('2' + password);
+			document.getElementById("cpassword_error").innerHTML = "";
+		}
+
+	}
+</script>
+
+</head>
+
+<body>
+
+	<form action="home.jsp" name="insert" method="post"
+		onsubmit="validateForm();">
+
+		<table cellpadding="7px" cellspacing="7px">
+			<tr>
+				<td>First Name</td>
+				<td><input type="text" name="fname" id="input_fname"
+					onblur="validateFirstName();"></td>
+				<td><span style="color: red;" id="fname_error"></span></td>
+			</tr>
+			<tr>
+				<td>Last Name</td>
+				<td><input type="text" name="lname" id="input_lname"></td>
+				<td><span style="color: red;" id="lname_error"></span></td>
+			</tr>
+			<tr>
+				<td>Email Address</td>
+				<td><input type="email" name="email" id="input_email"
+					onblur="validateEmail();"></td>
+				<td><span style="color: red;" id="email_error"></span></td>
+			</tr>
+
+			<tr>
+				<td>Contact</td>
+				<td><input type="number" name="contact" id="input_contact"
+					onblur="validateContact();"></td>
+				<td><span style="color: red;" id="contact_error"></span></td>
+			</tr>
+
+			<tr>
+				<td>Address</td>
+				<td><textarea rows="5" cols="21" name="address"
+						id="input_address"></textarea></td>
+				<td><span style="color: red;" id="address_error"></span></td>
+			</tr>
+			<tr>
+				<td>Gender</td>
+				<td><input type="radio" name="gender" value="male">Male
+					<input type="radio" name="gender" value="female">Female</td>
+				<td><span style="color: red;" id="gender_error"></span></td>
+			</tr>
+
+			<tr>
+				<td>Hobbies</td>
+				<td><input type="checkbox" name="hobby" value="reading">Reading<br>
+					<input type="checkbox" name="hobby" value="dancing">Dancing<br>
+					<input type="checkbox" name="hobby" value="running">Running<br>
+					<input type="checkbox" name="hobby" value="cooking">Cooking<br>
+					<input type="checkbox" name="hobby" value="painting">Painting<br>
+				</td>
+				<td><span style="color: red;" id="hobbies_error"></span></td>
+			</tr>
+			<tr>
+				<td>Education</td>
+				<td><select name="education" id="education">
+						<option value="">--- Select Education ---</option>
+						<option value="10th">10th</option>
+						<option value="12th">12th</option>
+						<option value="BE">BE</option>
+						<option value="BCom">B.COM</option>
+						<option value="BA">BA</option>
+						<option value="Other">Others</option>
+				</select></td>
+				<td><span style="color: red;" id="education_error"></span></td>
+			</tr>
+
+			<tr>
+				<td>Resume</td>
+				<td><input type="file" name="resume"></td>
+			</tr>
+			<tr>
+				<td>Password</td>
+				<td><input type="password" name="password" id="input_password"
+					onblur="validatePassword();"></td>
+				<td><span style="color: red;" id="password_error"></span></td>
+			</tr>
+			<tr>
+				<td>Confirm Password</td>
+				<td><input type="password" name="cpassword"
+					id="input_cpassword"></td>
+				<td><span style="color: red;" id="cpassword_error"></span></td>
+			</tr>
+
+			<tr>
+				<td colspan="2" align="center"><input type="submit"
+					name="submit" value="INSERT"></td>
+			</tr>
+
+		</table>
+
+	</form>
+
+</body>
+</html>

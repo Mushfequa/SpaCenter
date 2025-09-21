@@ -1,0 +1,30 @@
+.body{
+    background-color: aquamarine;
+    padding: 0%;
+    margin: 0;
+}
+
+h1{
+
+    font-style: italic;
+    background-color: cadetblue;
+    color: azure;
+    text-align: center;
+
+}
+.container{
+    margin: 50;
+    padding: 10;
+    display:flex;
+    text-decoration: solid;
+    font-size: large;
+    text-align: center;
+    box-shadow: 0cqb;
+    border-style: dashed;
+    box-sizing: content-box;
+    background-color:crimson;
+    width: 20%;
+    height: 15%;
+    box-sizing: border-box;
+
+}

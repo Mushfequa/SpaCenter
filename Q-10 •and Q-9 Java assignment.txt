@@ -1,0 +1,248 @@
+Q-10 • Write above Java program for after successful registration student can login and if 
+login credentials are correct then show student’s home page with his/her detail.
+
+loginServlet
+
+import java.io.IOException;
+import java.sql.Connection;
+import java.sql.DriverManager;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+import javax.servlet.ServletException;
+import javax.servlet.annotation.WebServlet;
+import javax.servlet.http.HttpServlet;
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
+
+@WebServlet("/LoginServlet")
+public class LoginServlet extends HttpServlet {
+    protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+        String email = request.getParameter("email");
+        String password = request.getParameter("password");
+        
+        try {
+            Class.forName("com.mysql.cj.jdbc.Driver");
+            Connection conn = DriverManager.getConnection("jdbc:mysql://localhost:3306/yourdb", "root", "password");
+            String query = "SELECT * FROM students WHERE email = ? AND password = ?";
+            PreparedStatement stmt = conn.prepareStatement(query);
+            stmt.setString(1, email);
+            stmt.setString(2, password);  // You should hash and compare the hashed password in production
+            ResultSet rs = stmt.executeQuery();
+            
+            if (rs.next()) {
+                HttpSession session = request.getSession();
+                session.setAttribute("studentId", rs.getInt("id"));
+                session.setAttribute("studentName", rs.getString("name"));
+                session.setAttribute("studentEmail", rs.getString("email"));
+                
+                response.sendRedirect("home.jsp");  // Redirect to student home page
+            } else {
+                response.getWriter().write("Invalid credentials");
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+            response.getWriter().write("Login failed!");
+        }
+    }
+}
+
+	6. Student Home Page (home.jsp)
+
+<%@ page import="javax.servlet.http.HttpSession" %>
+<%
+    HttpSession session = request.getSession(false);
+    if (session == null || session.getAttribute("studentId") == null) {
+        response.sendRedirect("login.jsp");
+        return;
+    }
+%>
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Student Home</title>
+</head>
+<body>
+    <h2>Welcome, <%= session.getAttribute("studentName") %>!</h2>
+    <p>Your Email: <%= session.getAttribute("studentEmail") %></p>
+    <p>Your Student ID: <%= session.getAttribute("studentId") %></p>
+    
+    <form action="LogoutServlet" method="post">
+        <button type="submit">Logout</button>
+    </form>
+</body>
+</html>
+
+
+CREATE TABLE students (
+    id INT AUTO_INCREMENT PRIMARY KEY,
+    name VARCHAR(100),
+    email VARCHAR(100) UNIQUE,
+    password VARCHAR(100)
+);
+
+
+Q-9
+
+1.create user table
+
+CREATE TABLE users (
+    id INT AUTO_INCREMENT PRIMARY KEY,
+    username VARCHAR(50) NOT NULL,
+    email VARCHAR(50) NOT NULL UNIQUE,
+    password VARCHAR(100) NOT NULL
+);
+2.bean
+user.java
+public class User {
+    private int id;
+    private String username;
+    private String email;
+    private String password;
+
+    // Getters and Setters
+    public int getId() { return id; }
+    public void setId(int id) { this.id = id; }
+    public String getUsername() { return username; }
+    public void setUsername(String username) { this.username = username; }
+    public String getEmail() { return email; }
+    public void setEmail(String email) { this.email = email; }
+    public String getPassword() { return password; }
+    public void setPassword(String password) { this.password = password; }
+}
+
+3.userDao
+import java.sql.Connection;
+import java.sql.DriverManager;
+import java.sql.PreparedStatement;
+import java.sql.SQLException;
+
+public class UserDAO {
+    public void registerUser(User user) throws ClassNotFoundException {
+        String INSERT_USERS_SQL = "INSERT INTO users (username, email, password) VALUES (?, ?, ?);";
+
+        try (Connection connection = DriverManager.getConnection("jdbc:mysql://localhost:3306/user_db", "root", "password");
+             PreparedStatement preparedStatement = connection.prepareStatement(INSERT_USERS_SQL)) {
+            
+            preparedStatement.setString(1, user.getUsername());
+            preparedStatement.setString(2, user.getEmail());
+            preparedStatement.setString(3, user.getPassword());
+
+            preparedStatement.executeUpdate();
+        } catch (SQLException e) {
+            printSQLException(e);
+        }
+    }
+
+    private void printSQLException(SQLException ex) {
+        for (Throwable e : ex) {
+            if (e instanceof SQLException) {
+                e.printStackTrace(System.err);
+                System.err.println("SQLState: " + ((SQLException) e).getSQLState());
+                System.err.println("Error Code: " + ((SQLException) e).getErrorCode());
+                System.err.println("Message: " + e.getMessage());
+                Throwable t = ex.getCause();
+                while (t != null) {
+                    System.out.println("Cause: " + t);
+                    t = t.getCause();
+                }
+            }
+        }
+    }
+}
+
+3.registerServlet
+
+import java.io.IOException;
+import javax.servlet.ServletException;
+import javax.servlet.annotation.WebServlet;
+import javax.servlet.http.HttpServlet;
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+
+@WebServlet("/register")
+public class RegisterServlet extends HttpServlet {
+    private UserDAO userDAO = new UserDAO();
+
+    protected void doPost(HttpServletRequest request, HttpServletResponse response)
+            throws ServletException, IOException {
+        String username = request.getParameter("username");
+        String email = request.getParameter("email");
+        String password = request.getParameter("password");
+
+        User user = new User();
+        user.setUsername(username);
+        user.setEmail(email);
+        user.setPassword(password);
+
+        try {
+            userDAO.registerUser(user);
+        } catch (ClassNotFoundException e) {
+            e.printStackTrace();
+        }
+
+        response.sendRedirect("login.jsp");
+    }
+}
+
+4.register.jsp
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Register</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+</head>
+<body>
+    <div class="container">
+        <h2>User Registration</h2>
+        <form action="register" method="post">
+            <div class="form-group">
+                <label for="username">Username:</label>
+                <input type="text" class="form-control" name="username" required>
+            </div>
+            <div class="form-group">
+                <label for="email">Email:</label>
+                <input type="email" class="form-control" name="email" required>
+            </div>
+            <div class="form-group">
+                <label for="password">Password:</label>
+                <input type="password" class="form-control" name="password" required>
+            </div>
+            <button type="submit" class="btn btn-primary">Register</button>
+        </form>
+    </div>
+</body>
+</html>
+   
+5.login.jsp
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Login</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+</head>
+<body>
+    <div class="container">
+        <h2>User Login</h2>
+        <form action="login" method="post">
+            <div class="form-group">
+                <label for="email">Email:</label>
+                <input type="email" class="form-control" name="email" required>
+            </div>
+            <div class="form-group">
+                <label for="password">Password:</label>
+                <input type="password" class="form-control" name="password" required>
+            </div>
+            <button type="submit" class="btn btn-primary">Login</button>
+        </form>
+    </div>
+</body>
+</html>

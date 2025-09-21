@@ -1,0 +1,16 @@
+body { font-family: Arial, sans-serif; }
+    .hero {
+      background: url('hero-image.jpg') no-repeat center center/cover;
+      height: 100vh;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: white;
+      text-align: center;
+      background-color: rgba(0,0,0,0.5);
+      background-blend-mode: overlay;
+    }
+    .service-card { transition: 0.3s; }
+    .service-card:hover { transform: scale(1.05); box-shadow: 0 4px 20px rgba(0,0,0,0.2); }
+    footer { background: #222; color: #fff; padding: 20px 0; }
+ 
