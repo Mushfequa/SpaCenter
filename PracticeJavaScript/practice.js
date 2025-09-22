@@ -315,14 +315,7 @@ let word= sentence.split("");
     console.log(longest("node js is framework"))
 
 
-    function reverseWord(sentence){
-        return sentence
-        .split(" ")
-        .map( word=>   word.split("").reverse().join(""))
-        .join(" ");
-            }
-            console.log(reverseWord("node js is framework"));
-
+    
             function notRepeatedCharacter(str) {
                 for(char of str){
                     if(str.indexOf(char)===str.lastIndexOf(char)){
@@ -338,3 +331,37 @@ let word= sentence.split("");
 
               }
               console.log(remove("maam"));
+
+              
+              function reverseWord(sentence){
+                return sentence
+                .split(" ")
+                .map( word=>   word.split("").reverse().join(""))
+                .join(" ");
+                    }
+
+                    console.log(reverseWord("node js is framework"));
+
+                    function capital(str){
+                   let freq={};
+                   for(char of str){
+                    freq[char]=(freq[char]||0)+1;
+                   }
+
+                    
+                        
+                    return freq;
+                        
+                       }
+        
+                      
+                      console.log(capital("aabbbccccddddd"))
+
+                      let n=5;
+                      for(let i=1;i<=n;i++){
+                        console.log("".repeat(i));
+
+                      }
+
+
+        
